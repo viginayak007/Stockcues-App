@@ -1,0 +1,68 @@
+
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container">
+            <div ng-repeat="discoverDetails in Data[1]">
+                <div ng-class="discoverDetails.BoxColour">
+                    <div class="col-md-6 col-lg-6">
+                        <div class="card-box">
+                            <div class="row p-t-10 m-b-20">
+                                <h4>
+                                    <i class="md md-brightness-1 pull-left"></i> Strategy Stockcues</h4>
+                                <a href="#">
+                                    <button type="button" ng-class="discoverDetails.ButtonColour" class="btn pull-right text-uppercase" ng-click="pageChanged('strategy');changeStrategyID(discoverDetails.ID)">Invest Now</button>
+                                </a>
+                                <div class="clearfix"></div>
+                                <div class="pull-left m-t-15">
+                                    <img ng-src="{{ discoverDetails.ImageUrl }}" />
+                                </div>
+                                <div class="text-left m-t-15">
+                                    <h5>{{ discoverDetails.StrategyName }}</h5>
+                                    <p style="height:200px; text-overflow:ellipsis;">{{ discoverDetails.Descr }}
+                                        <a href="sample.html">
+                                            <em>see more</em>
+                                        </a>
+                                    </p>
+
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="m-t-10">
+                                    <div class="col-md-4 p-0">
+                                        <div class="text-left strategy_value">
+                                            <p>{{ discoverDetails.CAGR}}</p>
+                                            <span>CAGR (%)</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 p-0">
+                                        <div class="text-left strategy_value">
+                                            <p>{{ discoverDetails.SharpRatio }}</p>
+                                            <span>Sharp Ratio</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 p-0">
+                                        <div class="text-left strategy_value">
+                                            <p>{{ discoverDetails.BestMonthReturns }}</p>
+                                            <span>Best Month Return (%)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+
+        </div>
+        <!-- container -->
+
+    </div>
+    <!-- content -->
+</div>
+    
