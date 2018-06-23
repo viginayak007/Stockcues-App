@@ -125,17 +125,27 @@
                                                             <i ng-class="{'icon-minus-sign':true,'icon-plus-sign':false }"></i>
                                                             test
                                                     </div>
-                                            </div> -->
+                                            </div> -->{{ Data[3] }}
                                             <accordion close-others="true">  
-                                                    <accordion-group is-open="false">
-                                                        <accordion-heading>
-                                                            <i ng-class="{'fa fa-plus':true,'fa fa-minus':false }"></i>
-                                                          c
-                                                        </accordion-heading>
-                                                        d
-                                                     </accordion-group>
-                                                      
-                                                  </accordion>
+                                                <accordion-group is-open="false" ng-repeat="segementHeader in segmentHeader()">
+                                                    <accordion-heading>
+                                                        <!-- <i ng-class="{'fa fa-plus':true,'fa fa-minus':false }"></i> -->
+                                                    <i class="accordion-title accordionTitle"></i>
+                                                    <div class="text-left pull-left">{{ segementHeader }}</div>
+                                                    <div class="text-right">80.02</div>
+                                                    </accordion-heading>
+                                                    <div class="table-responsive">
+                                                        <table class="table m-0">
+                                                            <tbody>
+                                                                <tr ng-repeat="ss in Data[3] | filter:{ Segment : segementHeader }">
+                                                                    <td class="blue">{{ ss.StockName }}</td>
+                                                                    <td class="black text-right">{{ ss.Weightage }}</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </accordion-group>
+                                            </accordion>
                                             <div class="accordion">
                                                 <dl>
                                                     <dt>

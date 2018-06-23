@@ -365,5 +365,17 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
             }
         }
     };
-
+    
+    $scope.segmentHeader = function() {
+        if($scope.Data[3]){
+            var uniqueNames = [];
+            for(var i = 0; i < $scope.Data[3].length; i++){    
+                if(uniqueNames.indexOf($scope.Data[3][i].Segment) === -1){
+                    uniqueNames.push($scope.Data[3][i].Segment);        
+                }        
+            }
+            return uniqueNames;
+        }
+        
+    };
 });

@@ -42,8 +42,9 @@ module.exports = function (grunt) {
                         'js/**/*.js',
                         'main.min.js',
                         'style.min.css',
-                        'view/*.html',
-                        'Index.html',
+                        'views/*.html',
+                        'views/**/*.html',
+                        'index.html',
                     ]
                 },
                 options: {

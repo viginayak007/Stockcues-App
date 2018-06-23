@@ -440,5 +440,49 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
             }
         }
     };
-
+    
+    $scope.segmentHeader = function() {
+        if($scope.Data[3]){
+            var uniqueNames = [];
+            for(var i = 0; i < $scope.Data[3].length; i++){    
+                if(uniqueNames.indexOf($scope.Data[3][i].Segment) === -1){
+                    uniqueNames.push($scope.Data[3][i].Segment);        
+                }        
+            }
+            return uniqueNames;
+        }
+        
+    };
 });
+app.filter('unique', function() {
+
+  return function (arr, targetField) {
+
+    var values = [],
+        i, 
+        unique,
+        l = arr.length, 
+        results = [],
+        obj;
+
+    for( i = 0; i < arr.length; i++ ) {
+
+      obj = arr[i];
+
+      // check for uniqueness
+      unique = true;
+      for( v = 0; v < values.length; v++ ){
+        if( obj[targetField] == values[v] ){
+          unique = false;
+        }
+      }
+
+      if( unique ){
+        values.push( obj[targetField] );
+        results.push( obj );
+      }
+
+    }
+    return results;
+  };
+})
