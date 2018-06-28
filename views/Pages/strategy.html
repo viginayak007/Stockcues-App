@@ -127,7 +127,7 @@
                                                     </div>
                                             </div> -->
                                             <accordion close-others="true" ng-init = "segmentTotal = 0">  
-                                                <accordion-group is-open="false" ng-repeat="segementHeader in segmentHeader()">
+                                                <accordion-group is-open="false" ng-repeat="segementHeader in segmentHeader(strategyId)">
                                                     <accordion-heading>
                                                         <!-- <i ng-class="{'fa fa-plus':true,'fa fa-minus':false }"></i> -->
                                                         <div class="text-left pull-left">{{ segementHeader }}</div>
@@ -136,7 +136,7 @@
                                                     <div class="table-responsive">
                                                         <table class="table m-0">
                                                             <tbody>
-                                                                <tr  ng-repeat="ss in Data[3] | filter:{ Segment : segementHeader }">
+                                                                <tr  ng-repeat="ss in Data[3] | filter:{ Segment : segementHeader } | filter:{ StrategyId :strategyId }">
                                                                     <td class="blue">{{ ss.StockName }}</td>
                                                                     <td class="black text-right" ng-init="$parent.segmentTotal = $parent.segmentTotal + ss.Weightage">{{ ss.Weightage }}</td>
                                                                 </tr>
@@ -145,88 +145,6 @@
                                                     </div>
                                                 </accordion-group>
                                             </accordion>
-                                            <div class="accordion">
-                                                <dl>
-                                                    <dt>
-                                                        <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger">
-                                                            <!-- <span>Insurance</span> <span class="pull-right">80.02</span> -->
-                                                            <div class="text-left pull-left">Insurance</div>
-                                                            <div class="text-right">80.02</div>
-                                                        </a>
-                                                    </dt>
-                                                    <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
-                                                        <div class="table-responsive">
-                                                            <table class="table m-0">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td class="blue">ICICI Prudential Life Insurance</td>
-                                                                        <td class="black text-right">14.28</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="blue">ICICI Prudential Life Insurance</td>
-                                                                        <td class="black text-right">14.28</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="blue">ICICI Prudential Life Insurance</td>
-                                                                        <td class="black text-right">14.28</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="blue">ICICI Prudential Life Insurance</td>
-                                                                        <td class="black text-right">14.28</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="blue">ICICI Prudential Life Insurance</td>
-                                                                        <td class="black text-right">14.28</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="blue">ICICI Prudential Life Insurance</td>
-                                                                        <td class="black text-right">14.28</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </dd>
-                                                    <dt>
-                                                        <a href="#accordion2" aria-expanded="false" aria-controls="accordion2" class="accordion-title accordionTitle js-accordionTrigger">
-                                                            <div class="text-left pull-left">MF</div>
-                                                            <div class="text-right">19.98</div>
-                                                        </a>
-                                                    </dt>
-                                                    <dd class="accordion-content accordionItem is-collapsed" id="accordion2" aria-hidden="true">
-                                                        <div class="table-responsive">
-                                                            <table class="table m-0">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td class="blue">ICICI Prudential Life Insurance</td>
-                                                                        <td class="black text-right">14.28</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="blue">ICICI Prudential Life Insurance</td>
-                                                                        <td class="black text-right">14.28</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="blue">ICICI Prudential Life Insurance</td>
-                                                                        <td class="black text-right">14.28</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="blue">ICICI Prudential Life Insurance</td>
-                                                                        <td class="black text-right">14.28</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="blue">ICICI Prudential Life Insurance</td>
-                                                                        <td class="black text-right">14.28</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="blue">ICICI Prudential Life Insurance</td>
-                                                                        <td class="black text-right">14.28</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </dd>
-            
-                                                </dl>
-                                            </div>
                                         </div>
             
                                         <div class="clearfix"></div>            

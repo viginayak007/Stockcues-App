@@ -451,7 +451,6 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
             }
             return uniqueNames;
         }
-        
     };
 });
 app.filter('unique', function() {
