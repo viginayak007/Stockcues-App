@@ -3,11 +3,11 @@
 <!-- ============================================================== -->
 <div class="content-page">
     <!-- Start content -->
-    <div ng-repeat="discoverDetails in Data[1] | filter:{ ID : strategyId }">
+    <div >
         <div class="content">
             <div class="container">
             
-                <div class="discover_box">
+                <div class="discover_box" ng-repeat="discoverDetails in Data[1] | filter:{ ID : strategyId }">
                     <div class="col-md-12 col-lg-12">
                         <div class="card-box m-b-0">
                             <div class="row m-b-20">
@@ -127,16 +127,16 @@
                                                     </div>
                                             </div> -->
                                             <accordion close-others="true" ng-init = "segmentTotal = 0">  
-                                                <accordion-group is-open="false" ng-repeat="segementHeader in segmentHeader(strategyId)">
+                                                <accordion-group is-open="false" ng-repeat="segementHeader in segments">
                                                     <accordion-heading>
                                                         <!-- <i ng-class="{'fa fa-plus':true,'fa fa-minus':false }"></i> -->
-                                                        <div class="text-left pull-left">{{ segementHeader }}</div>
-                                                        <div class="text-right">{{ segmentTotal | number: 2 }}</div>
+                                                        <div class="text-left pull-left">{{ segementHeader.name }}</div>
+                                                        <div class="text-right">{{ segementHeader.total | number: 2 }}</div>
                                                     </accordion-heading>
                                                     <div class="table-responsive">
                                                         <table class="table m-0">
                                                             <tbody>
-                                                                <tr  ng-repeat="ss in Data[3] | filter:{ Segment : segementHeader } | filter:{ StrategyId :strategyId }">
+                                                                <tr  ng-repeat="ss in Data[3] | filter:{ Segment : segementHeader.name } | filter:{ StrategyId :strategyId }">
                                                                     <td class="blue">{{ ss.StockName }}</td>
                                                                     <td class="black text-right" ng-init="$parent.segmentTotal = $parent.segmentTotal + ss.Weightage">{{ ss.Weightage }}</td>
                                                                 </tr>

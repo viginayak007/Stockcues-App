@@ -81,12 +81,14 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
     $scope.strategyStockData = []; //save th data according to startrgey
     $scope.strategytotalAmount = 0; //total amount of stratgey
     $scope.copyStrategyStockData = []; //copy of data to refresh
+    $scope.segments = []; //segment json for discovery page
 
     var childWindow = {};
     var currentOrderList = "";
     var user = {};
     var popoutUrl = 'https://pro.upstox.com/trade/';
     var orderlistobj = [];
+    
     $scope.confirmAmount = function () {
         orderlistobj = [];
         orderlistobj.push({
@@ -130,10 +132,9 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
                 }
 
             }).then(function successCallback(response) {
-                console.log(e.data);
+                // console.log(e.data);
 
             }, function errorCallback(response) {
-                console.log(e.data);
                 alert('error');
                 $window.location.assign('/login');
             });
@@ -142,7 +143,6 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
 
     function ProcessChildMessage(message) {
         var _msg = {};
-        console.log(orderlistobj);
         switch (message) {
             case 'getOrderList':
                 _msg = {
@@ -247,11 +247,11 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
             return stock.currentPrice;
         }));
         $scope.copyStrategyStockData = angular.copy($scope.strategyStockData);
+        $scope.segmentHeader(id);
     }
 
 
     $scope.changeAmt = function (budgetAmt) {
-        console.log(budgetAmt);
         $scope.strategyStockData = [];
         $scope.strategyStockData = angular.copy($scope.copyStrategyStockData);
         if (!isNaN(budgetAmt)) {
@@ -260,7 +260,6 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
     }
 
     $scope.changeQty = function (budgetAmt) {
-        console.log('call');
         orderlistobj = [];
         if (budgetAmt >= $scope.minStockPrice) {
             angular.forEach($scope.strategyStockData, function (value, key) {
@@ -393,64 +392,72 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
         "formatters": {}
     };
 
-    $scope.myChart = {
-        "type": "PieChart",
-        "displayed": false,
-        "data": {
-            "cols": [{
-                    id: "t",
-                    label: "MF",
-                    type: "string"
-                },
-                {
-                    id: "s",
-                    label: "INSURANCE",
-                    type: "number"
-                }
-            ],
-            "rows": [{
-                    c: [{
-                            v: "MF"
-                        },
-                        {
-                            v: 20
-                        },
-                    ]
-                },
-                {
-                    c: [{
-                            v: "INSURANCE"
-                        },
-                        {
-                            v: 80
-                        }
-                    ]
-                },
-            ],
-        },
-        "options": {
-            colors: ['#cccccc', '#3d6a94'],
-            pieStartAngle: 200,
-            chartArea: {
-                width: '100%',
-                height: 250
-            },
-            legend: {
-                position: 'none'
-            }
-        }
-    };
     
-    $scope.segmentHeader = function() {
-        if($scope.Data[3]){
-            var uniqueNames = [];
-            for(var i = 0; i < $scope.Data[3].length; i++){    
-                if(uniqueNames.indexOf($scope.Data[3][i].Segment) === -1){
-                    uniqueNames.push($scope.Data[3][i].Segment);
-                }        
+    $scope.segmentHeader = function(stratgeyId) {
+        $scope.chartData ={};
+        $scope.segments =[];
+        $scope.findIndexOf = function(segementnName) {
+            var idx = $scope.segments.findIndex(function(obj){
+                return obj.name === segementnName
+            })
+            return idx
+        };
+        $scope.getChartData = function(){
+            var cols =[];
+            var rows = [];
+            if($scope.segments){
+                angular.forEach($scope.segments, function(value, key){
+                    cols.push({
+                        id: value.name,
+                        label: value.name,
+                        type: "string"
+                    });
+                    rows.push({
+                        c: [{
+                                v: value.name
+                            },
+                            {
+                                v: value.total
+                            },
+                        ]   
+                    });
+                });
             }
-            return uniqueNames;
+            $scope.myChart = {
+                "type": "PieChart",
+                "displayed": false,
+                "data": {"cols":cols, "rows":rows},
+                "options": {
+                    colors: ['#3d6a94','#cccccc', '#cedeed', "#adb2d8", "#4158a6"],
+                    pieStartAngle: 200,
+                    chartArea: {
+                        width: '100%',
+                        height: 250
+                    },
+                    legend: {
+                        position: 'none'
+                    }
+                }
+            };
+                
         }
+        if($scope.Data[3]){
+            for(var i = 0; i < $scope.Data[3].length; i++){
+                if($scope.Data[3][i].StrategyId == stratgeyId){
+                    if($scope.findIndexOf($scope.Data[3][i].Segment) === -1 ) {
+                        $scope.segments.push({"name":$scope.Data[3][i].Segment, "total": $scope.Data[3][i].Weightage });
+                    }else{
+                        $scope.segments[$scope.findIndexOf($scope.Data[3][i].Segment)].total += $scope.Data[3][i].Weightage;
+                    }
+                    // $scope.segments[$scope.findIndexOf($scope.Data[3][i].Segment)].segmentStock.push($scope.Data[3][i])
+                }
+
+            }
+
+           $scope.getChartData(); 
+
+        }
+        
     };
 });
 app.filter('unique', function() {
