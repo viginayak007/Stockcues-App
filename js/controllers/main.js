@@ -172,7 +172,7 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
             return stock.currentPrice;
         }));
         $scope.copyStrategyStockData = angular.copy($scope.strategyStockData);
-        $scope.segmentHeader(id);
+        $scope.segment(id);
     }
 
 
@@ -318,7 +318,7 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
     };
 
     
-    $scope.segmentHeader = function(stratgeyId) {
+    $scope.segment = function(stratgeyId) {
         $scope.chartData ={};
         $scope.segments =[];
         $scope.findIndexOf = function(segementnName) {

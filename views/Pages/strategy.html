@@ -5,9 +5,9 @@
     <!-- Start content -->
     <div >
         <div class="content">
-            <div class="container">
-            
-                <div class="discover_box" ng-repeat="discoverDetails in Data[1] | filter:{ ID : strategyId }">
+            <div class="container" ng-repeat="discoverDetails in Data[1] | filter:{ ID : strategyId }">
+            <!-- {{discoverDetails}} -->
+                <div ng-class="discoverDetails.BoxColour">
                     <div class="col-md-12 col-lg-12">
                         <div class="card-box m-b-0">
                             <div class="row m-b-20">
@@ -46,7 +46,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-12 card-box-blue m-t-0">
+                        <div class="col-md-12 card-box-blue m-t-0" ng-class"discoverDetails.cardBoxColor">
                             <div class="col-md-3">
                                 <div class="text-left growth_amt">
                                     <p>Growth </p>
