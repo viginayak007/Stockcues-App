@@ -319,53 +319,18 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
 
     
     $scope.segment = function(stratgeyId) {
-        $scope.chartData ={};
+        $scope.myChart = {};
         $scope.segments =[];
+         var cols = [];
+         var rows = [];
+
         $scope.findIndexOf = function(segementnName) {
             var idx = $scope.segments.findIndex(function(obj){
-                return obj.name === segementnName
+                return obj.name === segementnName;
             })
-            return idx
+            return idx;
         };
-        $scope.getChartData = function(){
-            var cols =[];
-            var rows = [];
-            if($scope.segments){
-                angular.forEach($scope.segments, function(value, key){
-                    cols.push({
-                        id: value.name,
-                        label: value.name,
-                        type: "string"
-                    });
-                    rows.push({
-                        c: [{
-                                v: value.name
-                            },
-                            {
-                                v: value.total
-                            },
-                        ]   
-                    });
-                });
-            }
-            $scope.myChart = {
-                "type": "PieChart",
-                "displayed": false,
-                "data": {"cols":cols, "rows":rows},
-                "options": {
-                    colors: ['#3d6a94','#cccccc', '#cedeed', "#adb2d8", "#4158a6"],
-                    pieStartAngle: 200,
-                    chartArea: {
-                        width: '100%',
-                        height: 250
-                    },
-                    legend: {
-                        position: 'none'
-                    }
-                }
-            };
-                
-        }
+     
         if($scope.Data[3]){
             for(var i = 0; i < $scope.Data[3].length; i++){
                 if($scope.Data[3][i].StrategyId == stratgeyId){
@@ -374,13 +339,61 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
                     }else{
                         $scope.segments[$scope.findIndexOf($scope.Data[3][i].Segment)].total += $scope.Data[3][i].Weightage;
                     }
-                    // $scope.segments[$scope.findIndexOf($scope.Data[3][i].Segment)].segmentStock.push($scope.Data[3][i])
                 }
-
             }
-
-           $scope.getChartData(); 
-
+           if ($scope.segments) {
+               angular.forEach($scope.segments, function (value, key) {
+                   cols.push({
+                       id: value.name,
+                       label: value.name,
+                       type: "string"
+                   });
+                   rows.push({
+                       c: [{
+                               v: value.name
+                           },
+                           {
+                               v: value.total
+                           },
+                       ]
+                   });
+               });
+               if (cols.length == 1 && rows.length == 1) {
+                   cols.push({
+                       id: "NA",
+                       label: "NA",
+                       type: "string"
+                   });
+                   rows.push({
+                       c: [{
+                               v: "NA"
+                           },
+                           {
+                               v: 0
+                           }
+                       ]
+                   });
+               }
+           }
+           $scope.myChart = {
+               "type": "PieChart",
+               "displayed": false,
+               "data": {
+                   "cols": cols,
+                   "rows": rows
+               },
+               "options": {
+                //    colors: ['#3d6a94', '#cccccc', '#cedeed', "#adb2d8", "#4158a6"],
+                   pieStartAngle: 200,
+                   chartArea: {
+                       width: '100%',
+                       height: 250
+                   },
+                   legend: {
+                       position: 'right'
+                   }
+               }
+           };
         }
         
     };

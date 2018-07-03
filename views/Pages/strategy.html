@@ -6,7 +6,6 @@
     <div >
         <div class="content">
             <div class="container" ng-repeat="discoverDetails in Data[1] | filter:{ ID : strategyId }">
-            <!-- {{discoverDetails}} -->
                 <div ng-class="discoverDetails.BoxColour">
                     <div class="col-md-12 col-lg-12">
                         <div class="card-box m-b-0">
@@ -44,9 +43,8 @@
 
                                 </div>
                             </div>
-
                         </div>
-                        <div class="col-md-12 card-box-blue m-t-0" ng-class"discoverDetails.cardBoxColor">
+                        <div ng-class="discoverDetails.CardBoxColor" class="col-md-12 m-t-0">
                             <div class="col-md-3">
                                 <div class="text-left growth_amt">
                                     <p>Growth </p>
@@ -64,17 +62,12 @@
                                     <button type="button" class="btn btn-info text-uppercase pull-right m-t-10" ng-click="pageChanged('buy-stockcues')">Buy Stockcues</button>
                                 </a>
                             </div>
-
                         </div>
-
-
                     </div>
                 </div>
-
-
                 <div class="col-lg-12 m-t-30">
                         <tabset>
-                                <tab heading="Past Performance" style="width:50%;text-align:center">
+                                <tab heading="Past Performance" style="width:50%;text-align:center" class="active">
                                         <h5 class="text-uppercase">Past Performance</h5>
                                         <div class="col-md-5 col-md-offset-1">
                                             <div class="performance_detail">
@@ -99,37 +92,29 @@
             
                                         </div>
                                         <div class="clearfix"></div>
-                                        <!-- <div id="chart_div" style="width: 100%; height: 350px;"></div> -->
                                         <div google-chart chart="myChartObject" style="width: 100%; height: 350px;"></div>
                                 </tab>
                                 <tab heading="Stocks & Weights" style="width:50%;text-align:center">
                                         <h5 class="text-uppercase">Stocks & Weights</h5>
                                         <div class="col-md-5 stock-weight">
                                             <h5 class="m-t-20 m-b-0">Segment Composition</h5>
-                                            <!-- <div id='myChart'></div> -->
-                                            <div google-chart chart="myChart" ></div>
-                                            <div class="strategy_bullets">
-                                                <span>
-                                                    <i class="fa fa-square"></i> MF
-                                                    <i class="fa fa-square"></i> Insurance</span>
+                                            <br>
+                                            <div google-chart chart="myChart"></div>
+                                            <!-- <div class="strategy_bullets">
+                                                <span ng-repeat="segementHeader in segments">
+                                                    <i class="fa fa-square"></i> {{ segementHeader.name }}
+                                                </span>
             
-                                            </div>
+                                            </div> -->
                                         </div>
                                         <div class="col-lg-7">
                                             <div class="stocks_body">
                                                 <div class="text-left pull-left">Segments & Stock</div>
                                                 <div class="text-right">Weightage %</div>
                                             </div>
-                                            <!-- <div accordion class="accordion" is-open="false">
-                                                    <div accordion-group class="accord" heading="a">
-                                                            <i ng-class="{'icon-minus-sign':true,'icon-plus-sign':false }"></i>
-                                                            test
-                                                    </div>
-                                            </div> -->
-                                            <accordion close-others="true" ng-init = "segmentTotal = 0">  
+                                            <accordion close-others="true">  
                                                 <accordion-group is-open="false" ng-repeat="segementHeader in segments">
                                                     <accordion-heading>
-                                                        <!-- <i ng-class="{'fa fa-plus':true,'fa fa-minus':false }"></i> -->
                                                         <div class="text-left pull-left">{{ segementHeader.name }}</div>
                                                         <div class="text-right">{{ segementHeader.total | number: 2 }}</div>
                                                     </accordion-heading>
@@ -138,7 +123,7 @@
                                                             <tbody>
                                                                 <tr  ng-repeat="ss in Data[3] | filter:{ Segment : segementHeader.name } | filter:{ StrategyId :strategyId }">
                                                                     <td class="blue">{{ ss.StockName }}</td>
-                                                                    <td class="black text-right" ng-init="$parent.segmentTotal = $parent.segmentTotal + ss.Weightage">{{ ss.Weightage }}</td>
+                                                                    <td class="black text-right">{{ ss.Weightage }}</td>
                                                                 </tr>
                                                             </tbody>
                                                         </table>
@@ -150,7 +135,6 @@
                                         <div class="clearfix"></div>            
                                 </tab>
                               </tabset>
-                   
                 </div>
                 <!-- end row -->
             </div>
