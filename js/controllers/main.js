@@ -390,8 +390,9 @@ app.controller('mainController', function ($scope, $location, $window, $http, $c
                        height: 250
                    },
                    legend: {
-                       position: 'right'
-                   }
+                       position: 'bottom'
+                   },
+                   
                }
            };
         }

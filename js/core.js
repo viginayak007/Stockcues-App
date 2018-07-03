@@ -1,10 +1,4 @@
 // declare modules
-angular.module('Main', []);
-angular.module('login', []);
-angular.module('Home', []);
-angular.module('Discover', []);
-angular.module('Investments', []);
-
 
 var app = angular.module('Stock-Cues', [
     'ngRoute',
@@ -12,11 +6,6 @@ var app = angular.module('Stock-Cues', [
     'ngSanitize',
     'googlechart',
     'ui.bootstrap',
-    'Main',
-    'login',
-    'Home',
-    'Discover',
-    'Investments'
 ])
 
 //config route
@@ -49,7 +38,7 @@ app.run(['$rootScope', '$location', '$cookieStore', '$http', function ($rootScop
     // $rootScope.globals.currentUser ='Admin';
 
     $rootScope.$on('$locationChangeStart', function (event, next, current) {
-        $rootScope.globals.code = $location.search().code
+        $rootScope.globals.code = $location.search().code;
 
         //check if the code and bring user detial from Upstox API 
         if (!$rootScope.globals.code) {
@@ -58,9 +47,3 @@ app.run(['$rootScope', '$location', '$cookieStore', '$http', function ($rootScop
     });
 
 }]);
-
-window.onbeforeunload = confirmExit;
-
-function confirmExit() {
-    return "You have attempted to leave this page. Are you sure?";
-}

@@ -1,4 +1,12 @@
-<div id="wrapper">
+<div id="wrapper" ng-if="!Data">
+    <div id="main-div">
+            <div style="margin: auto; position: absolute; top: 0; left: 0; bottom: 0; right: 0; width:25%; height:25%; text-align:center;">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+                <h1>Loading...</h1>
+            </div>
+    </div>
+</div>
+<div id="wrapper" ng-if="Data">
     <!-- Top Bar Start -->
     <div class="topbar">
     
